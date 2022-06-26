@@ -1,0 +1,60 @@
+  
+conky.config = {
+
+background=true,
+update_interval=1,
+double_buffer=true,
+no_buffers=true,
+imlib_cache_size=10,
+
+draw_shades=false,
+draw_outline=false,
+draw_borders=false,
+
+gap_x=30,
+gap_y=280,
+
+alignment="top_left",
+
+minimum_height=400,
+minimum_width=250,
+
+own_window=true,
+own_window_type="dock",
+own_window_transparent=true,
+own_window_hints="undecorated,below,sticky,skip_taskbar,skip_pager",
+
+own_window_argb_visual=true,
+own_window_argb_value=0,
+
+use_xft=true,
+xftalpha=1,
+text_buffer_size=256,
+override_utf8_locale=true,
+
+default_color='FFFFFF',
+color0='FFFFFF',
+color1='FFFFFF',
+}
+
+conky.text = [[
+${font Noto Sans Regular:size=18}${color0}\
+${alignc}${time %A %d %B}\
+
+${font UbuntuThin:size=70}${color0}\
+${alignc}${time %H:%M:%S}${font}\
+${font Noto Sans Regular:size=11}${color0}\
+
+${execi 500 bash ./accuweather/acc_RSS}
+${execpi 500 sed -n '1p' ./accuweather/weather|cut -c 1-10}
+${font conkyweather:size=30}${color0}${execpi 500 sed -n '2p' ./accuweather/weather}${font}
+${font Noto Sans Regular:size=11}${goto 75}${voffset -25}${color0}${execpi 500 sed -n '1p' ./accuweather/weather|cut -c 12-40}
+${stippled_hr}
+${execpi 500 sed -n '6p' ./accuweather/weather}
+${font conkyweather:size=30}${execpi 500 sed -n '8p' ./accuweather/weather}${font}
+${font Noto Sans Regular:size=11}${goto 75}${voffset -25}${execpi 500 sed -n '7p' ./accuweather/weather|cut -c 1-10}
+${goto 75}${execpi 500 sed -n '7p' ./accuweather/weather|cut -c 12-20}
+${goto 75}${execpi 500 sed -n '7p' ./accuweather/weather|cut -c 22-60}
+${stippled_hr}
+#${alignc}${texeci 500 curl 'wttr.in/Moscow?format=Sunrise+%S+Sunset+%s'}
+]]
