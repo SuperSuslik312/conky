@@ -63,7 +63,7 @@ TEXT
 #NETWORK - CABLE wlan0 WIFI wlan0
 ${font Noto Sans UI:size=10}
 ${if_up wlan0}${color3}Connection: $alignr ${wireless_essid wlan0} WIFI${color3}${else}${color3}Connection: $alignr Ethernet${else}$endif
-${color3}VPN $alignr${if_up tun0}${color #66BF60}Connected${else}${color #FF6640}Disconnected$endif
+${color3}VPN $alignr${if_up YoRHa-PC}${color #66BF60}Connected${else}${color #FF6640}Disconnected$endif
 ${if_up wlan0}${color3}Local IP $alignr ${addr wlan0}${else}${color3}Local IP $alignr ${addr eno1}$endif
 ${color3}Public IP $alignr Undefined
 #${color3}External IP: ${color}${alignr}${exec curl icanhazip.com}
