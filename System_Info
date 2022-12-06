@@ -78,11 +78,11 @@ ${font Noto Sans UI:size=10}${color3}${alignr}Time Remaining: ${execi 60 acpi | 
 ${font Noto Sans UI:bold:size=10}${color3}DRIVES ${color2}${hr 2}${font Noto Sans UI:size=10}
 #NVME
 ${color4}${diskiograph /dev/mapper/YoRHa 25,}
-${voffset -30}${color3}NVME          ${fs_used /} / ${fs_size /} $alignr ${color1}r ${diskio_read /dev/mapper/YoRHa}${color5} w ${diskio_write /dev/mapper/YoRHa}
+${voffset -35}${color3}NVME          ${fs_used /} / ${fs_size /} $alignr ${color1}r ${diskio_read /dev/mapper/YoRHa}${color5} w ${diskio_write /dev/mapper/YoRHa}
 ${color4}${fs_bar 10 /}
 #HDD
 ${color4}${diskiograph /dev/sda1 25,}
-${voffset -30}${color1}HDD           ${fs_used /home/suslik/Delta} / ${fs_size /home/suslik/Delta} $alignr ${color1}r ${diskio_read /dev/sda1} w ${color5}${diskio_write /dev/sda1}
+${voffset -35}${color1}HDD           ${fs_used /home/suslik/Delta} / ${fs_size /home/suslik/Delta} $alignr ${color1}r ${diskio_read /dev/sda1} w ${color5}${diskio_write /dev/sda1}
 ${color4}${fs_bar 10 /home/suslik/Delta}
 
 #PROCESSES

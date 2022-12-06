@@ -1,5 +1,5 @@
 #/bin/sh
-sleep 6
+sleep 1
 conky -c ./Calendar > /dev/null 2>&1 &
 conky -c ./network > /dev/null 2>&1 &
 conky -c ./network2 > /dev/null 2>&1 &
