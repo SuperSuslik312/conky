@@ -1,66 +1,60 @@
-# Create own window instead of using desktop (required in nautilus)
+conky.config = {
+    own_window = true,
+    own_window_type = 'dock',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,skip_taskbar,skip_pager',
+    own_window_colour = '000000',
+    own_window_class = 'Conky',
+    own_window_title = 'Sysinfo Conky',
 
-own_window yes
-own_window_type dock
-own_window_transparent yes
-own_window_hints undecorated,below,skip_taskbar,skip_pager ## ,sticky
-own_window_colour 000000
-own_window_class Conky
-own_window_title Sysinfo Conky
-
-## ARGB can be used for real transparency
-own_window_argb_visual yes
-## Valid range is 0-255, where 0 is 0% opacity, and 255 is 100% opacity.
-own_window_argb_value 0
+    --ARGB can be used for real transparency
+    own_window_argb_visual = true,
+    --Valid range is 0-255, where 0 is 0% opacity, and 255 is 100% opacity.
+    own_window_argb_value = 0,
 
 
-use_xft yes
-xftfont 123:size=9
-xftalpha 0.1
-total_run_times 0
-double_buffer yes
-no_buffers yes
-uppercase no
-cpu_avg_samples 2
-net_avg_samples 1
-override_utf8_locale yes
-use_spacer left
-text_buffer_size 256
-temperature_unit celsius
-own_window_colour 000000
+    use_xft = true,
+    xftalpha = 0.1,
+    total_run_times = 0,
+    double_buffer = true,
+    no_buffers = true,
+    uppercase = false,
+    cpu_avg_samples = 2,
+    net_avg_samples = 1,
+    override_utf8_locale = true,
+    use_spacer = 'left',
+    text_buffer_size = 256,
+    temperature_unit = 'celsius',
+    own_window_colour = '000000',
 
-#shading, outlines and colours
+    --shading, outlines and colours
 
-draw_borders no
-draw_graph_borders no
-default_color3
-draw_shades yes
-default_shade_color 000000
-draw_outline no
-default_outline_color OliveDrab
- 
-color2 B4C3CA #LightBlue
-color3 white
-color4 3daee9 #DarkBlue
-color5 GreenYellow
-color6 DarkOrange
-color7 DarkRed
+    draw_borders = false,
+    draw_graph_borders = false,
+    default_color3,
+    draw_shades = false,
+    default_shade_color = '000000',
+    draw_outline = false,
+    default_outline_color = 'OliveDrab',
+    
+    color2 = 'B4C3CA', --LightBlue
+    color3 = 'white',
+    color4 = '3daee9', --DarkBlue
+    color5 = 'GreenYellow',
+    color6 = 'DarkOrange',
+    color7 = 'DarkRed',
 
-#Size & Alignment
-minimum_size 315 5
-maximum_width 315
-alignment top_right
-gap_x 20
-gap_y 30
-update_interval 1.0
+    --Size & Alignment
+    minimum_width = 315,
+    maximum_width = 315,
+    alignment = 'top_right',
+    gap_x = 20,
+    gap_y = 50,
+    update_interval = 1,
+}
 
-lan  = "eno1"
-
-TEXT
-
-${voffset -32}
-
-${color3}${font Noto Sans UI:size=10}$nodename 
+conky.text = [[
+${color3}${font falseto Sans UI:size=10}${nodename}
 Operating System:$alignr${color3}${execi 999999 cat `ls -atr /etc/*-release | tail -2` | grep "PRETTY_NAME" | cut -d= -f2 | sed 's/"//g'}
 Kernel:${color3}$alignr$sysname $kernel
 Architecture:$alignr $machine
@@ -71,25 +65,24 @@ GPU Temp: ${alignr}${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,no
 
 ${color}Battery $alignr${battery_percent BAT0}%
 ${color green}${voffset 2}${if_match ${battery_percent BAT0}<=20}${color7}${battery_bar 10 BAT0}${else}${if_match ${battery_percent BAT0}<=50}${color6}${battery_bar 10 BAT0}${else}${if_match ${battery_percent BAT0}<=90}${color5}${battery_bar 10 BAT0}${else}${if_match ${battery_percent BAT0}>90}${color4}${battery_bar 10 BAT0}${endif}${endif}${endif}${endif}
-${font Noto Sans UI:size=10}${color3}${alignr}Time Remaining: ${execi 60 acpi | awk '{print $5}'}
-#${alignr}${voffset -32}${font Noto Sans UI:size=6}${font}${execi 60 acpi | grep -Eo '\w+,' | grep -Eo '\w+'}
+${font falseto Sans UI:size=10}${color3}${alignr}Time Remaining: ${execi 60 acpi | awk '{print $5}'}
 
-#DRIVES
-${font Noto Sans UI:bold:size=10}${color3}DRIVES ${color2}${hr 2}${font Noto Sans UI:size=10}
-#NVME
+# DRIVES
+${font falseto Sans UI:bold:size=10}${color3}DRIVES ${color2}${hr 2}${font falseto Sans UI:size=10}
+# NVME
 ${color4}${diskiograph /dev/mapper/YoRHa 25,}
-${voffset -35}${color3}NVME          ${fs_used /} / ${fs_size /} $alignr ${color1}r ${diskio_read /dev/mapper/YoRHa}${color5} w ${diskio_write /dev/mapper/YoRHa}
+${voffset -35}${color3}NVME $alignc ${fs_used /} / ${fs_size /} $alignr ${color1}r ${diskio_read /dev/mapper/YoRHa}${color5} w ${diskio_write /dev/mapper/YoRHa}
 ${color4}${fs_bar 10 /}
-#HDD
+# HDD
 ${color4}${diskiograph /dev/sda1 25,}
-${voffset -35}${color1}HDD           ${fs_used /home/suslik/Delta} / ${fs_size /home/suslik/Delta} $alignr ${color1}r ${diskio_read /dev/sda1} w ${color5}${diskio_write /dev/sda1}
+${voffset -35}${color1}HDD $alignc ${fs_used /home/suslik/Delta} / ${fs_size /home/suslik/Delta} $alignr ${color1}r ${diskio_read /dev/sda1}${color5} w ${diskio_write /dev/sda1}
 ${color4}${fs_bar 10 /home/suslik/Delta}
 
-#PROCESSES
-${font Noto Sans UI:bold:size=10}${color3}PROCESSES ${color2}${hr 2}
-${font Noto Sans UI:size=10}${color3}
-#CPU
-${color3}${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'|uniq|cut -c 1-17}${font Noto Sans UI:size=10} ${freq_g cpu0}Ghz${alignr}${cpu cpu0}%
+# PROCESSES
+${font falseto Sans UI:bold:size=10}${color3}PROCESSES ${color2}${hr 2}
+${font falseto Sans UI:size=10}${color3}
+# CPU
+${color3}${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'|uniq|cut -c 1-17}${font falseto Sans UI:size=10} ${freq_g cpu0}Ghz${alignr}${cpu cpu0}%
 ${color green}${if_match ${cpu cpu1}<=50}${color4}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}<=70}${color5}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}<=90}${color6}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}>90}${color7}${cpubar cpu1 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu2}<=50}${color4}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}<=70}${color5}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}<=90}${color6}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}>90}${color7}${cpubar cpu2 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu3}<=50}${color4}${cpubar cpu3 10,} ${else}${if_match ${cpu cpu3}<=70}${color5}${cpubar cpu3 10,} ${else}${if_match ${cpu cpu3}<=90}${color6}${cpubar cpu3 10,} ${else}${if_match ${cpu cpu3}>90}${color7}${cpubar cpu3 10,}${endif}${endif}${endif}${endif}${color}
@@ -102,7 +95,7 @@ ${color green}${if_match ${cpu cpu9}<=50}${color4}${cpubar cpu9 10,} ${else}${if
 ${color green}${if_match ${cpu cpu10}<=50}${color4}${cpubar cpu10 10,} ${else}${if_match ${cpu cpu10}<=70}${color5}${cpubar cpu10 10,} ${else}${if_match ${cpu cpu10}<=90}${color6}${cpubar cpu10 10,} ${else}${if_match ${cpu cpu10}>90}${color7}${cpubar cpu10 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu11}<=50}${color4}${cpubar cpu11 10,} ${else}${if_match ${cpu cpu11}<=70}${color5}${cpubar cpu11 10,} ${else}${if_match ${cpu cpu11}<=90}${color6}${cpubar cpu11 10,} ${else}${if_match ${cpu cpu11}>90}${color7}${cpubar cpu11 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu12}<=50}${color4}${cpubar cpu12 10,} ${else}${if_match ${cpu cpu12}<=70}${color5}${cpubar cpu12 10,} ${else}${if_match ${cpu cpu12}<=90}${color6}${cpubar cpu12 10,} ${else}${if_match ${cpu cpu12}>90}${color7}${cpubar cpu12 10,}${endif}${endif}${endif}${endif}${color}
-#MEMORYBAR
+# MEMORY BAR
 ${color3}RAM $alignc ${if_match ${exec free -m|awk '/^Mem/{print $3/1024}'}<1}${exec free -m|awk '/^Mem/{printf "%.2f MiB\n",$3}'} ${else}${exec free -m|awk '/^Mem/{printf "%.2f GiB\n",$3/1024}'}${endif} / $memmax $alignr ${exec free -m|awk '/^Mem/{printf "%.1f%%",100*$3/$2}'}
 ${color green}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}<=50}${color4}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'} ${else}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}<=70}${color5}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'} ${else}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}<=90}${color6}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'} ${else}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}>90}${color7}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'}${endif}${endif}${endif}${endif}${color}
 
@@ -114,8 +107,8 @@ ${color3}SWAP $alignc ${if_match ${exec swapon -s|awk '/swap/{print $4/1024/1024
 ${color green}${if_match ${exec swapon -s|awk '/swap/{print 100*$4/$3}'}<=50}${color4}${execbar swapon -s|awk '/swap/{print 100*$4/$3}'} ${else}${if_match ${exec swapon -s|awk '/swap/{print 100*$4/$3}'}<=70}${color5}${execbar swapon -s|awk '/swap/{print 100*$4/$3}'} ${else}${if_match ${exec swapon -s|awk '/swap/{print 100*$4/$3}'}<=90}${color6}${execbar swapon -s|awk '/swap/{print 100*$4/$3}'} ${else}${if_match ${exec swapon -s|awk '/swap/{print 100*$4/$3}'}>90}${color7}${execbar swapon -s|awk '/swap/{print 100*$4/$3}'}${endif}${endif}${endif}${endif}${color}
 
 # CPU/MEMORY USE
-${font}CPU${goto 165}RAM${font Noto Sans UI:size=7}
-${voffset 3}$font$color3${top name 1}${goto 110}$color2${top cpu 1}%${goto 165}$color3${top_mem name 1}$color2${goto 270}${top_mem mem_res 1}
+${font}CPU${goto 165}RAM${font falseto Sans UI:size=8}
+${voffset 3}$color3${top name 1}${goto 110}$color2${top cpu 1}%${goto 165}$color3${top_mem name 1}$color2${goto 270}${top_mem mem_res 1}
 $color3${top name 2}${goto 110}$color2${top cpu 2}%${goto 165}$color3${top_mem name 2}$color2${goto 270}${top_mem mem_res 2}
 $color3${top name 3}${goto 110}$color2${top cpu 3}%${goto 165}$color3${top_mem name 3}$color2${goto 270}${top_mem mem_res 3}
 $color3${top name 4}${goto 110}$color2${top cpu 4}%${goto 165}$color3${top_mem name 4}$color2${goto 270}${top_mem mem_res 4}
@@ -124,13 +117,4 @@ $color3${top name 6}${goto 110}$color2${top cpu 6}%${goto 165}$color3${top_mem n
 $color3${top name 7}${goto 110}$color2${top cpu 7}%${goto 165}$color3${top_mem name 7}$color2${goto 270}${top_mem mem_res 7}
 $color3${top name 8}${goto 110}$color2${top cpu 8}%${goto 165}$color3${top_mem name 8}$color2${goto 270}${top_mem mem_res 8}
 $color3${top name 9}${goto 110}$color2${top cpu 9}%${goto 165}$color3${top_mem name 9}$color2${goto 270}${top_mem mem_res 9}
-
-
-
-
-
-
-
-
-
-
+]]

@@ -1,42 +1,41 @@
+conky.config = {
+    update_interval = 60,
+    double_buffer = true,
+    no_buffers = true,
 
-background yes
-update_interval 60
-double_buffer yes
-no_buffers yes
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
 
-draw_shades no
-draw_outline no
-draw_borders no
+    gap_x = 60,
+    gap_y = 25,
 
-gap_x 60
-gap_y 25
+    alignment = 'bottom_left',
 
-alignment bottom_left
+    minimum_width = 0,
+    maximum_width = 240,
 
-minimum_size 0 0
-maximum_width 240
+    own_window = true,
+    own_window_type = 'dock',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,skip_taskbar,skip_pager',
 
-own_window yes
-own_window_type dock
-own_window_transparent yes
-own_window_hints undecorated,below,skip_taskbar,skip_pager
+    own_window_argb_visual = true,
+    own_window_argb_value = 0,
 
-own_window_argb_visual yes
-own_window_argb_value 0
+    use_xft = true,
+    xftalpha = 0.1,
+    text_buffer_size = 256,
+    override_utf8_locale = true,
 
-use_xft yes
-xftalpha 0.1
-text_buffer_size 256
-override_utf8_locale yes
+    --Colours
+    color3 = 'white',
+    color4 = '3daee9' --DarkBlue,
+    color8 = 'gray',
+}
 
-# Colours
-color3 white
-color4 3daee9 #DarkBlue
-color8 gray
-
-
-TEXT
-
+conky.text = [[
 ${font Inconsolata:size=12}${color8}${execpi 1800 LAR=`date +%-d`; ncal -bhM| sed -e 's/\<'$LAR'\>/${color4}${font Inconsolata:bold:size=12}&${color3}${color3}${font Inconsolata:size=12}/' | sed ':a;N;$!ba;s/\n/\n/g'}
 
 ${color3}${execpi 900 ncal -bh -m `date +%m` -A1 -B-1 | sed ':a;N;$!ba;s/\n/\n/g'}${color}${font Inconsolata}
+]]

@@ -1,7 +1,7 @@
 #/bin/sh
 sleep 1
-conky -c ./Calendar > /dev/null 2>&1 &
-conky -c ./network > /dev/null 2>&1 &
-conky -c ./network2 > /dev/null 2>&1 &
+# conky -c ./Calendar > /dev/null 2>&1 &
+# conky -c ./Weather-Clock > /dev/null 2>&1 &
+# conky -c ./network > /dev/null 2>&1 &
+# conky -c ./network2 > /dev/null 2>&1 &
 conky -c ./System_Info > /dev/null 2>&1 &
-conky -c ./Weather-Clock > /dev/null 2>&1 &
