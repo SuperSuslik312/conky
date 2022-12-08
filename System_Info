@@ -7,9 +7,9 @@ conky.config = {
     own_window_class = 'Conky',
     own_window_title = 'Sysinfo Conky',
 
-    --ARGB can be used for real transparency
+    -- ARGB can be used for real transparency
     own_window_argb_visual = true,
-    --Valid range is 0-255, where 0 is 0% opacity, and 255 is 100% opacity.
+    -- Valid range is 0-255, where 0 is 0% opacity, and 255 is 100% opacity.
     own_window_argb_value = 0,
 
 
@@ -27,7 +27,7 @@ conky.config = {
     temperature_unit = 'celsius',
     own_window_colour = '000000',
 
-    --shading, outlines and colours
+    -- shading, outlines and colours
 
     draw_borders = false,
     draw_graph_borders = false,
@@ -37,20 +37,22 @@ conky.config = {
     draw_outline = false,
     default_outline_color = 'OliveDrab',
     
-    color2 = 'B4C3CA', --LightBlue
+    color2 = 'B4C3CA', -- LightBlue
     color3 = 'white',
-    color4 = '3daee9', --DarkBlue
+    color4 = '3daee9', -- DarkBlue
     color5 = 'GreenYellow',
     color6 = 'DarkOrange',
     color7 = 'DarkRed',
 
-    --Size & Alignment
+    -- Size & Alignment
     minimum_width = 315,
     maximum_width = 315,
     alignment = 'top_right',
     gap_x = 20,
     gap_y = 50,
     update_interval = 1,
+    --lua_load = './rings.lua', -- WIP
+    --lua_draw_hook_pre = 'rings' -- WIP
 }
 
 conky.text = [[
@@ -61,7 +63,7 @@ Architecture:$alignr $machine
 Uptime: $alignr${uptime}
 CPU Temp: ${alignr}${exec sensors|awk '/^Tctl/{print $2}'}
 GPU Temp: ${alignr}${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader|awk '{print "+" $0 "°C"}'}
-#${color3}Load: ${color}${alignr}${loadavg}
+# ${color3}Load: ${color}${alignr}${loadavg}
 
 ${color}Battery $alignr${battery_percent BAT0}%
 ${color green}${voffset 2}${if_match ${battery_percent BAT0}<=20}${color7}${battery_bar 10 BAT0}${else}${if_match ${battery_percent BAT0}<=50}${color6}${battery_bar 10 BAT0}${else}${if_match ${battery_percent BAT0}<=90}${color5}${battery_bar 10 BAT0}${else}${if_match ${battery_percent BAT0}>90}${color4}${battery_bar 10 BAT0}${endif}${endif}${endif}${endif}
@@ -82,7 +84,10 @@ ${color4}${fs_bar 10 /home/suslik/Delta}
 ${font Noto Sans UI:bold:size=10}${color3}PROCESSES ${color2}${hr 2}
 ${font Noto Sans UI:size=10}${color3}
 # CPU
-${color3}${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'|uniq|cut -c 1-17}${font Noto Sans UI:size=10} ${freq_g cpu0}Ghz${alignr}${cpu cpu0}%
+# ${voffset 90}
+${color3}${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'|uniq|cut -c 1-17}${font Noto Sans UI:size=10}${freq_g cpu}Ghz${alignr}${cpu}%
+# Frequency - ${freq_g cpu}Ghz
+# Total Load - ${cpu}%
 ${color green}${if_match ${cpu cpu1}<=50}${color4}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}<=70}${color5}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}<=90}${color6}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}>90}${color7}${cpubar cpu1 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu2}<=50}${color4}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}<=70}${color5}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}<=90}${color6}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}>90}${color7}${cpubar cpu2 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu3}<=50}${color4}${cpubar cpu3 10,} ${else}${if_match ${cpu cpu3}<=70}${color5}${cpubar cpu3 10,} ${else}${if_match ${cpu cpu3}<=90}${color6}${cpubar cpu3 10,} ${else}${if_match ${cpu cpu3}>90}${color7}${cpubar cpu3 10,}${endif}${endif}${endif}${endif}${color}
@@ -96,6 +101,7 @@ ${color green}${if_match ${cpu cpu10}<=50}${color4}${cpubar cpu10 10,} ${else}${
 ${color green}${if_match ${cpu cpu11}<=50}${color4}${cpubar cpu11 10,} ${else}${if_match ${cpu cpu11}<=70}${color5}${cpubar cpu11 10,} ${else}${if_match ${cpu cpu11}<=90}${color6}${cpubar cpu11 10,} ${else}${if_match ${cpu cpu11}>90}${color7}${cpubar cpu11 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu12}<=50}${color4}${cpubar cpu12 10,} ${else}${if_match ${cpu cpu12}<=70}${color5}${cpubar cpu12 10,} ${else}${if_match ${cpu cpu12}<=90}${color6}${cpubar cpu12 10,} ${else}${if_match ${cpu cpu12}>90}${color7}${cpubar cpu12 10,}${endif}${endif}${endif}${endif}${color}
 # MEMORY BAR
+# ${voffset 100}
 ${color3}RAM $alignc ${if_match ${exec free -m|awk '/^Mem/{print $3/1024}'}<1}${exec free -m|awk '/^Mem/{printf "%.2f MiB\n",$3}'} ${else}${exec free -m|awk '/^Mem/{printf "%.2f GiB\n",$3/1024}'}${endif} / $memmax $alignr ${exec free -m|awk '/^Mem/{printf "%.1f%%",100*$3/$2}'}
 ${color green}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}<=50}${color4}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'} ${else}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}<=70}${color5}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'} ${else}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}<=90}${color6}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'} ${else}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}>90}${color7}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'}${endif}${endif}${endif}${endif}${color}
 
