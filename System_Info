@@ -51,8 +51,12 @@ conky.config = {
     gap_x = 20,
     gap_y = 50,
     update_interval = 1,
-    --lua_load = './rings.lua', -- WIP
-    --lua_draw_hook_pre = 'rings' -- WIP
+    --------------------------------
+    ------- Work In Progress -------
+    --------------------------------
+    --lua_load = './rings.lua',   --
+    --lua_draw_hook_pre = 'rings' --
+    --------------------------------
 }
 
 conky.text = [[
@@ -84,10 +88,11 @@ ${color4}${fs_bar 10 /home/suslik/Delta}
 ${font Noto Sans UI:bold:size=10}${color3}PROCESSES ${color2}${hr 2}
 ${font Noto Sans UI:size=10}${color3}
 # CPU
-# ${voffset 90}
+# ${voffset 54}
 ${color3}${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'|uniq|cut -c 1-17}${font Noto Sans UI:size=10}${freq_g cpu}Ghz${alignr}${cpu}%
-# Frequency - ${freq_g cpu}Ghz
-# Total Load - ${cpu}%
+# ${voffset 6}${alignc}Frequency  ${freq_g cpu}Ghz
+# ${alignc}Total Load  ${cpu}%
+# ${alignc}Temp  ${exec sensors|awk '/^Tctl/{print $2}'}
 ${color green}${if_match ${cpu cpu1}<=50}${color4}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}<=70}${color5}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}<=90}${color6}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}>90}${color7}${cpubar cpu1 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu2}<=50}${color4}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}<=70}${color5}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}<=90}${color6}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}>90}${color7}${cpubar cpu2 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu3}<=50}${color4}${cpubar cpu3 10,} ${else}${if_match ${cpu cpu3}<=70}${color5}${cpubar cpu3 10,} ${else}${if_match ${cpu cpu3}<=90}${color6}${cpubar cpu3 10,} ${else}${if_match ${cpu cpu3}>90}${color7}${cpubar cpu3 10,}${endif}${endif}${endif}${endif}${color}
@@ -101,7 +106,7 @@ ${color green}${if_match ${cpu cpu10}<=50}${color4}${cpubar cpu10 10,} ${else}${
 ${color green}${if_match ${cpu cpu11}<=50}${color4}${cpubar cpu11 10,} ${else}${if_match ${cpu cpu11}<=70}${color5}${cpubar cpu11 10,} ${else}${if_match ${cpu cpu11}<=90}${color6}${cpubar cpu11 10,} ${else}${if_match ${cpu cpu11}>90}${color7}${cpubar cpu11 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu12}<=50}${color4}${cpubar cpu12 10,} ${else}${if_match ${cpu cpu12}<=70}${color5}${cpubar cpu12 10,} ${else}${if_match ${cpu cpu12}<=90}${color6}${cpubar cpu12 10,} ${else}${if_match ${cpu cpu12}>90}${color7}${cpubar cpu12 10,}${endif}${endif}${endif}${endif}${color}
 # MEMORY BAR
-# ${voffset 100}
+# ${voffset 40}
 ${color3}RAM $alignc ${if_match ${exec free -m|awk '/^Mem/{print $3/1024}'}<1}${exec free -m|awk '/^Mem/{printf "%.2f MiB\n",$3}'} ${else}${exec free -m|awk '/^Mem/{printf "%.2f GiB\n",$3/1024}'}${endif} / $memmax $alignr ${exec free -m|awk '/^Mem/{printf "%.1f%%",100*$3/$2}'}
 ${color green}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}<=50}${color4}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'} ${else}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}<=70}${color5}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'} ${else}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}<=90}${color6}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'} ${else}${if_match ${exec free -m|awk '/^Mem/{print 100*$3/$2}'}>90}${color7}${execbar free -m|awk '/^Mem/{print 100*$3/$2}'}${endif}${endif}${endif}${endif}${color}
 

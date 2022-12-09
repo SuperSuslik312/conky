@@ -1,4 +1,6 @@
--- Work In Progress
+----------------------
+-- Work In Progress --
+----------------------
 config = {
   bg_color = 0xffffff,
   bg_alpha = 0.2,
@@ -7,137 +9,155 @@ config = {
 }
 elements = {
   {
+    x0 = 5,
+    y0 = 462,
+    x1 = 231,
+    y1 = 462,
+    width = 2
+  },
+  {
     name = 'cpu',
     arg = 'cpu1',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 120,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 78,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu2',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 110,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 72,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu3',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 100,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 66,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu4',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 90,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 60,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu5',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 80,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 54,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu6',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 70,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 48,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu7',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 60,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 42,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu8',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 50,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 36,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu9',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 40,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 30,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu10',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 30,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 24,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu11',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 20,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 18,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
   {
     name = 'cpu',
     arg = 'cpu12',
     max = 100,
-    x = 200,
-    y = 520,
-    r = 10,
-    width = 10,
-    start_angle = -70,
-    end_angle = 250
+    x = 240,
+    y = 461,
+    r = 12,
+    width = 5,
+    start_angle = -90,
+    end_angle = 180
   },
+  -- {
+  --   name = 'battery_percent',
+  --   arg = 'BAT0',
+  --   max = 100,
+  --   x = 240,
+  --   y = 240,
+  --   r = 20,
+  --   width = 10,
+  --   start_angle = -90,
+  --   end_angle = 180
+  -- }
 }
 require 'cairo'
 function rgba(color, alpha)
