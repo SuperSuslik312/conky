@@ -57,8 +57,8 @@ conky.config = {
 
 conky.text = [[
 #NETWORK
-#${if_up wlan0}${font Noto Sans UI:bold:size=10}${color3}Connection: ${wireless_essid} ${color2} ${font Noto Sans UI:size=9}${color3}${else}${font Noto Sans UI:bold:size=10}${color3}Connection: Ethernet ${color2} ${color3}${else}$endif
-${font Noto Sans UI:size=9}
+#${if_up wlan0}${font Comic Sans MS:bold:size=10}${color3}Connection: ${wireless_essid} ${color2} ${font Comic Sans MS:size=9}${color3}${else}${font Comic Sans MS:bold:size=10}${color3}Connection: Ethernet ${color2} ${color3}${else}$endif
+${font Comic Sans MS:size=9}
 ${if_up wlan0}${goto 5}Down ${downspeedf wlan0} Kb/s / ${totaldown wlan0}${goto 305}Up ${upspeedf wlan0} Kb/s / ${totalup wlan0}${else}${goto 5}Down ${downspeedf eno1}Kb/s / ${totaldown eno1}${goto 305}Up ${upspeedf eno1}Kb/s / ${totalup eno1}${endif}
 ${if_up wlan0}${goto 5}${color3}${downspeedgraph wlan0 75,283}${goto 305}${upspeedgraph wlan0 75,283}${else}${goto 5}${color3}${downspeedgraph eno1 75,283}${goto 305}${upspeedgraph eno1 75,283}$endif
 ${if_up wlan0}${goto 5}Today - ${execi 10 vnstat -i wlan0 --oneline | cut -d\; -f4} ${goto 150}Yesterday - ${execi 10 vnstat -i wlan0 | grep "yesterday" | awk '{print $8" "substr ($9, 1, 3)}'} ${goto 305}This Week - ${execi 10 vnstat -i wlan0 -d --begin $(date --date="next Monday -1 week" +"%Y-%m-%d") --end $(date +"%Y-%m-%d") | grep "sum of" | awk '{print $10 $11}'} ${goto 450}This Month - ${execi 10 vnstat -i wlan0 --oneline | cut -d\; -f11}

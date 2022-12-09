@@ -60,7 +60,7 @@ conky.config = {
 }
 
 conky.text = [[
-${color3}${font Noto Sans UI:size=10}${nodename}
+${color3}${font Comic Sans MS:size=10}${nodename}
 Operating System:$alignr${color3}${execi 999999 cat `ls -atr /etc/*-release | tail -2` | grep "PRETTY_NAME" | cut -d= -f2 | sed 's/"//g'}
 Kernel:${color3}$alignr$sysname $kernel
 Architecture:$alignr $machine
@@ -71,10 +71,10 @@ GPU Temp: ${alignr}${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,no
 
 ${color}Battery $alignr${battery_percent BAT0}%
 ${color green}${voffset 2}${if_match ${battery_percent BAT0}<=20}${color7}${battery_bar 10 BAT0}${else}${if_match ${battery_percent BAT0}<=50}${color6}${battery_bar 10 BAT0}${else}${if_match ${battery_percent BAT0}<=90}${color5}${battery_bar 10 BAT0}${else}${if_match ${battery_percent BAT0}>90}${color4}${battery_bar 10 BAT0}${endif}${endif}${endif}${endif}
-${font Noto Sans UI:size=10}${color3}${alignr}Time Remaining: ${execi 60 acpi | awk '{print $5}'}
+${font Comic Sans MS:size=10}${color3}${alignr}Time Remaining: ${battery_time BAT0}
 
 # DRIVES
-${font Noto Sans UI:bold:size=10}${color3}DRIVES ${color2}${hr 2}${font Noto Sans UI:size=10}
+${font Comic Sans MS:bold:size=10}${color3}DRIVES ${color2}${hr 2}${font Comic Sans MS:size=10}
 # NVME
 ${color4}${diskiograph /dev/mapper/YoRHa 25,}
 ${voffset -35}${color3}NVME $alignc ${fs_used /} / ${fs_size /} $alignr ${color1}r ${diskio_read /dev/mapper/YoRHa}${color5} w ${diskio_write /dev/mapper/YoRHa}
@@ -85,13 +85,13 @@ ${voffset -35}${color1}HDD $alignc ${fs_used /home/suslik/Delta} / ${fs_size /ho
 ${color4}${fs_bar 10 /home/suslik/Delta}
 
 # PROCESSES
-${font Noto Sans UI:bold:size=10}${color3}PROCESSES ${color2}${hr 2}
-${font Noto Sans UI:size=10}${color3}
+${font Comic Sans MS:bold:size=10}${color3}PROCESSES ${color2}${hr 2}
+${font Comic Sans MS:size=10}${color3}
 # CPU
 # ${voffset 54}
-${color3}${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'|uniq|cut -c 1-17}${font Noto Sans UI:size=10}${freq_g cpu}Ghz${alignr}${cpu}%
-# ${voffset 6}${alignc}Frequency  ${freq_g cpu}Ghz
-# ${alignc}Total Load  ${cpu}%
+${color3}${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'|uniq|cut -c 1-17}${font Comic Sans MS:size=10}${freq_g cpu0}Ghz${alignr}${cpu cpu0}%
+# ${voffset 6}${alignc}Frequency  ${freq_g cpu0}Ghz
+# ${alignc}Total Usage  ${cpu cpu0}%
 # ${alignc}Temp  ${exec sensors|awk '/^Tctl/{print $2}'}
 ${color green}${if_match ${cpu cpu1}<=50}${color4}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}<=70}${color5}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}<=90}${color6}${cpubar cpu1 10,} ${else}${if_match ${cpu cpu1}>90}${color7}${cpubar cpu1 10,}${endif}${endif}${endif}${endif}${color}
 ${color green}${if_match ${cpu cpu2}<=50}${color4}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}<=70}${color5}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}<=90}${color6}${cpubar cpu2 10,} ${else}${if_match ${cpu cpu2}>90}${color7}${cpubar cpu2 10,}${endif}${endif}${endif}${endif}${color}
@@ -118,7 +118,7 @@ ${color3}SWAP $alignc ${if_match ${exec swapon -s|awk '/swap/{print $4/1024/1024
 ${color green}${if_match ${exec swapon -s|awk '/swap/{print 100*$4/$3}'}<=50}${color4}${execbar swapon -s|awk '/swap/{print 100*$4/$3}'} ${else}${if_match ${exec swapon -s|awk '/swap/{print 100*$4/$3}'}<=70}${color5}${execbar swapon -s|awk '/swap/{print 100*$4/$3}'} ${else}${if_match ${exec swapon -s|awk '/swap/{print 100*$4/$3}'}<=90}${color6}${execbar swapon -s|awk '/swap/{print 100*$4/$3}'} ${else}${if_match ${exec swapon -s|awk '/swap/{print 100*$4/$3}'}>90}${color7}${execbar swapon -s|awk '/swap/{print 100*$4/$3}'}${endif}${endif}${endif}${endif}${color}
 
 # CPU/MEMORY USE
-${font}CPU${goto 165}RAM${font Noto Sans UI:size=8}
+${font Comic Sans MS}CPU${goto 165}RAM${font Comic Sans MS:size=8}
 ${voffset 3}$color3${top name 1}${goto 110}$color2${top cpu 1}%${goto 165}$color3${top_mem name 1}$color2${goto 270}${top_mem mem_res 1}
 $color3${top name 2}${goto 110}$color2${top cpu 2}%${goto 165}$color3${top_mem name 2}$color2${goto 270}${top_mem mem_res 2}
 $color3${top name 3}${goto 110}$color2${top cpu 3}%${goto 165}$color3${top_mem name 3}$color2${goto 270}${top_mem mem_res 3}
